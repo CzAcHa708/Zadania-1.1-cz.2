@@ -1,0 +1,239 @@
+Ćwiczenie 1.1
+a)  indeks pierwszego elementu       = ___0___
+b)  indeks ostatniego elementu       = ___7___
+c)  liczba elementów                 = ___8___
+d)  poprawny warunek pętli po całej tablicy:  for (i = 0; i __<__ 8; i++)
+e)  co się stanie przy odwołaniu tab[8] w Javie?  w C? błąd
+
+Ćwiczenie 1.2
+Wzór ogólny: adres = 2000+i⋅4
+Rozmiar całej tablicy: 6⋅4=24 bajty.
+
+Ćwiczenie 1.3
+a) def srednia(tab):
+   return sum(tab) / len(tab)
+b) def minimum(tab):
+   return tab.index(min(tab))
+c) def zlicz(tab, wartosc):
+    licznik = 0
+    for x in tab:
+        if x > wartosc:
+            licznik += 1
+    return licznik
+
+Ćwiczenie 1.4
+a)  for (i = 1; i <= n; i++)  suma += tab[i];
+
+b)  int maks = 0;
+    for (i = 0; i < n; i++)  if (tab[i] > maks) maks = tab[i];
+
+c)  for (i = 0; i < n; i++)  tab[i] = tab[i+1];   // przesunięcie w lewo
+a) Błąd: pętla zaczyna się od indeksu 1 i wychodzi poza tablicę.
+for (i = 0; i < n; i++) suma += tab[i];
+b) Błąd: maks = 0 może być błędne, gdy wszystkie liczby są ujemne.
+int maks = tab[0];
+for (i = 1; i < n; i++)
+    if (tab[i] > maks) maks = tab[i];
+c) Błąd: ostatni element próbuje pobrać tab[n], który nie istnieje.
+for (i = 0; i < n - 1; i++) tab[i] = tab[i+1];
+
+Ćwiczenie 1.5
+a)  m[0][0] = ___1___      c)  m[2][3] = ___12___
+b)  m[1][2] = ___7___      d)  m[2][0] = ___9___
+e) for (int i = 0; i < 3; i++) {
+    int suma = 0;
+    for (int j = 0; j < 4; j++) {
+        suma += m[i][j];
+    }
+    cout << suma << endl;
+}
+f) int suma = 0;
+for (int i = 0; i < n; i++) {
+    suma += m[i][i];
+}
+
+Ćwiczenie 1.6
+a) Układ wierszami (row-major): 7, 8, 9, 1, 2, 3
+b) Układ kolumnami (column-major): 7, 1, 8, 2, 9, 3
+c) C – układ wierszami.
+Fortran – układ kolumnami.
+
+Ćwiczenie 1.7
+#include <iostream>
+using namespace std;
+
+int main() {
+    char tab[8][8];
+
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            if ((i + j) % 2 == 0)
+                tab[i][j] = '#';
+            else
+                tab[i][j] = '.';
+
+            cout << tab[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
+
+Ćwiczenie 2.1
+Po dodaniu elementu nr	 Rozmiar    Pojemność    Czy nastąpiło przepisanie?
+1	                  1          2           Nie
+2			  2          2           Nie
+3			  3          4           Tak
+5			  5          8           Tak
+9                         9          16          Tak
+
+Ćwiczenie 2.2
+Język	Typ tablicy dynamicznej	   Dodanie na koniec	Odczyt rozmiaru
+Python	list		           append()             len()
+Java	ArrayList		   add()                size()
+C++	vector		           push_back()          size()
+C#	List                       Add()                Count
+
+Ćwiczenie 2.3
+Dane	                                        Struktura	Uzasadnienie
+Oceny ucznia w kolejności wystawiania		Lista           Zachowuje kolejność dodawania ocen.
+Liczba mieszkańców według nazwy miasta		Słownik         Przypisuje liczbę mieszkańców do nazwy miasta.
+Kolejka zgłoszeń do rozpatrzenia		Kolejka         Zgłoszenia są obsługiwane w kolejności dodania.
+Ustawienia programu (nazwa opcji i wartość)	Słownik	        Każda nazwa opcji ma przypisaną wartość.
+Lista zakupów do odhaczania		        Lista           Pozwala przechowywać produkty i oznaczać je jako kupione.
+Liczba wystąpień każdego słowa w tekście        Słownik         Przechowuje słowo i liczbę jego wystąpień.
+
+Ćwiczenie 2.4
+a) Dodanie gwoździ
+magazyn["gwozdzie"] = 200
+
+b) Zwiększenie liczby śrubek o 30
+magazyn["srubki"] += 30
+
+c) Sprawdzenie, czy są wkręty
+print("wkret" in magazyn)
+
+d) Usunięcie podkładek
+del magazyn["podkladki"]
+
+e) Pozycje z wartością mniejszą niż 100
+for nazwa, liczba in magazyn.items():
+    if liczba < 100:
+        print(nazwa, liczba)
+
+f) Łączna liczba elementów
+print(sum(magazyn.values()))
+
+Ćwiczenie 2.5
+a)  numer PESEL                          _TAK, jest niezmiennym napisem lub liczbą.__
+b)  imię ucznia                          _TAK, jest napisem._
+c)  lista ocen                           _NIE, lista jest modyfikowalna.__
+d)  adres e-mail                         _Adres e-mail — TAK, jest napisem.__
+e)  data i godzina pomiaru               _TAK, jeśli użyjemy niemodyfikowalnego obiektu daty i czasu.__
+f)  obiekt, którego pola zmieniają się w trakcie    _NIE, jeśli jest modyfikowalny i nie może być hashowany.__
+
+Ćwiczenie 2.6
+zdanie = input("Podaj zdanie: ")
+slowa = zdanie.split()
+licznik = {}
+
+for slowo in slowa:
+    if slowo in licznik:
+        licznik[slowo] += 1
+    else:
+        licznik[slowo] = 1
+
+for slowo, ile in licznik.items():
+    print(slowo, "-", ile)
+
+Ćwiczenie 3.1
+Pole	        Typ	  Uzasadnienie
+tytul           String    Przechowuje tytuł książki.
+autor           String    Przechowuje imię i nazwisko autora.
+rok_wydania     Integer   Przechowuje rok wydania.
+cena            Float     Przechowuje cenę książki.
+dostepna        Boolean   Określa, czy książka jest dostępna (True/False).
+
+Ćwiczenie 3.2
+a)1.Łatwo pomylić dane należące do różnych pracowników.
+2.Trzeba pilnować, aby indeksy we wszystkich tablicach odpowiadały tej samej osobie.
+b) 
+struct Pracownik {
+    char nazwisko[40];
+    int wiek;
+    float pensja;
+};
+
+Pracownik pracownicy[100];
+c) 
+for (int i = 0; i < 100; i++) {
+    if (pracownicy[i].pensja > 5000) {
+        cout << pracownicy[i].nazwisko << endl;
+    }
+}
+
+Ćwiczenie 3.3
+a)  struct A { int x; int y; };                 = __8 bajtów (4 + 4)____
+
+b)  struct B { char c; int x; };                = __8 bajtów (1 + 3 bajty wyrównania + 4)____
+
+c)  struct C { char c; char d; int x; };        = __8 bajtów (1 + 1 + 2 bajty wyrównania + 4)____
+
+d)  union  D { int x; double y; char c[4]; };   = __8 bajtów (największe pole ma 8 bajtów)____
+
+int wymaga wyrównania do 4 bajtów. Po char dodawane są 3 bajty wypełnienia, aby int zaczynał się pod odpowiednim adresem.
+
+Ćwiczenie 3.4
+struct Zamowienie {
+    int numer;
+
+    struct {
+        string nazwa;
+        struct {
+            string ulica;
+            string miasto;
+            string kodPocztowy;
+        } adres;
+    } klient;
+
+    struct {
+        int dzien;
+        int miesiac;
+        int rok;
+    } data;
+
+    double wartosc;
+};
+
+Odwołanie do miasta klienta:
+zamowienie.klient.adres.miasto
+
+Ćwiczenie 3.5
+a) Struktura zajmuje miejsce na wszystkie pola, a unia tylko na największe pole.
+b) Jedno pole unii ma sensowną wartość w danej chwili.
+c) Pole rozpoznawcze informuje, które pole unii jest aktualnie używane.
+d) Unia może służyć do przechowywania różnych typów danych w jednym miejscu, np. liczby całkowitej lub zmiennoprzecinkowej.
+
+Ćwiczenie 3.6
+#include <iostream>
+using namespace std;
+
+struct Pomiar {
+    int typ; // 1 - całkowita, 2 - rzeczywista, 3 - błąd
+
+    union {
+        int calkowita;
+        double rzeczywista;
+        char blad[50];
+    } wynik;
+};
+
+if (pomiar.typ == 1)
+    cout << pomiar.wynik.calkowita;
+else if (pomiar.typ == 2)
+    cout << pomiar.wynik.rzeczywista;
+else if (pomiar.typ == 3)
+    cout << pomiar.wynik.blad;
+
+Wyjaśnienie: Pole typ informuje, która wartość unii jest aktualnie używana, dzięki czemu program wypisuje ją we właściwy sposób.
